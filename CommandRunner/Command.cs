@@ -14,14 +14,14 @@ namespace CommandRunner
         private int _secondsOfDelay;
 
 
-        public Command(string scriptFile, int secondsOfDelay)
+        public Command(string scriptFile, int secondsBetweenExecution)
         {
             if (!File.Exists(scriptFile)) { throw new FileNotFoundException(); }
 
-            if (secondsOfDelay <= 0) { throw new ArgumentException("Number of Seconds must be a positive integer", "secondsOfDelay"); }
+            if (secondsBetweenExecution <= 0) { throw new ArgumentException("Number of Seconds must be a positive integer", "secondsOfDelay"); }
 
             _scriptFile = scriptFile;
-            _secondsOfDelay = secondsOfDelay;
+            _secondsOfDelay = secondsBetweenExecution;
         }
 
         public void BeginExecution()

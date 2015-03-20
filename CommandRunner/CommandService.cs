@@ -16,6 +16,20 @@ namespace CommandRunner
 
         private static string _commandToExecute = ConfigurationManager.AppSettings["CommandToExecute"].ToString();
 
+        public int SecondsBetweenExecution
+        {
+            get
+            {
+                int seconds;
+                if (!int.TryParse(ConfigurationManager.AppSettings["SecondsBetweenExecution"], out seconds))
+                {
+                    seconds = -1;
+                }
+
+                return seconds;
+            }
+        }
+
         public CommandService()
         {
             InitializeComponent();
@@ -23,7 +37,7 @@ namespace CommandRunner
 
         protected override void OnStart(string[] args)
         {
-            var runner = new Command(_commandToExecute, 1);
+            var runner = new Command(_commandToExecute, SecondsBetweenExecution);
             runner.BeginExecution();
         }
 
