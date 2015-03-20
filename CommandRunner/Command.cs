@@ -8,13 +8,13 @@ using System.Timers;
 
 namespace CommandRunner
 {
-    public class RunCommands
+    public class Command
     {
         private string _scriptFile;
         private int _secondsOfDelay;
 
 
-        public RunCommands(string scriptFile, int secondsOfDelay)
+        public Command(string scriptFile, int secondsOfDelay)
         {
             if (!File.Exists(scriptFile)) { throw new FileNotFoundException(); }
 
