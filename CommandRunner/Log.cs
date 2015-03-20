@@ -6,8 +6,7 @@ namespace CommandRunner
     public class Log
     {
         private static TraceSource _traceSource;
-        private static string _traceSourceName = "_";
-        private static int _traceId = 0;
+        private static string _traceSourceName = "CommandRunnerTraceSource";
 
         public static TraceSource TextTraceSource
         {
@@ -35,7 +34,15 @@ namespace CommandRunner
 
         private static void WriteEvent(TraceEventType eventType, string message)
         {
-            _traceSource.TraceEvent(eventType, _traceId++, "{0} - {1}", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"), message);
+            var dateFormattedMessage = string.Format("{0} - {1}", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"), message);
+
+
+            for (int i = 0; i < _traceSource.Listeners.Count; i++)
+            {
+                var listener = _traceSource.Listeners[i];
+                listener.WriteLine(dateFormattedMessage);
+                listener.Flush();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.ServiceProcess;
+using Microsoft.VisualBasic;
 
 namespace CommandRunner
 {
@@ -21,7 +22,7 @@ namespace CommandRunner
                 Log.TextTraceSource.Listeners.Add(consoleTrace);
 
                 Log.Information("Constructing Runner");
-                var runner = new RunCommands(_commandToExecute, 1);
+                var runner = new Command(_commandToExecute, 1);
 
                 Log.Information("Beginning Execution");
                 runner.BeginExecution();
@@ -34,7 +35,7 @@ namespace CommandRunner
                 ServiceBase[] ServicesToRun;
                 ServicesToRun = new ServiceBase[] 
                 { 
-                    new Service1() 
+                    new CommandService() 
                 };
                 ServiceBase.Run(ServicesToRun);
             }

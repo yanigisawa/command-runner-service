@@ -1,6 +1,6 @@
 ﻿namespace CommandRunner
 {
-    partial class Service1
+    partial class CommandService
     {
         /// <summary> 
         /// Required designer variable.

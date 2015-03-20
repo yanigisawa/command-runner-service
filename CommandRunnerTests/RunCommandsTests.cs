@@ -17,13 +17,13 @@ namespace CommandRunnerTests
         [Test]
         public void RunCommands_IfCommandFileDoesNotExists_ExceptionThrown()
         {
-            Assert.Throws<FileNotFoundException>(() => { var rc = new RunCommands("someNonExistentFile.bat", 1); });
+            Assert.Throws<FileNotFoundException>(() => { var rc = new Command("someNonExistentFile.bat", 1); });
         }
 
         [Test]
         public void RunCommands_IfInvalidSecondsEntered_ExceptionThrown()
         {
-            Assert.Throws<ArgumentException>(() => { new RunCommands(_testFile, -1); });
+            Assert.Throws<ArgumentException>(() => { new Command(_testFile, -1); });
         }
     }
 }
