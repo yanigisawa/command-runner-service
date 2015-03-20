@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Log.cs" />
-    <Compile Include="RollingLogTraceListener.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandService.cs">
       <SubType>Component</SubType>
