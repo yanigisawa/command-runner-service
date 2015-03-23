@@ -34,8 +34,15 @@ namespace CommandRunner
 
         private static void WriteEvent(TraceEventType eventType, string message)
         {
-            var dateFormattedMessage = string.Format("{0} - {1}", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"), message);
+            if (_traceSource.Switch.ShouldTrace(eventType))
+            {
+                WriteMessageToListeners(string.Format("{0} - {1}", eventType.ToString().ToUpper(), message));
+            }
+        }
 
+        private static void WriteMessageToListeners(string message)
+        {
+            var dateFormattedMessage = string.Format("{0} - {1}", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"), message);
 
             for (int i = 0; i < _traceSource.Listeners.Count; i++)
             {

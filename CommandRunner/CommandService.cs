@@ -14,9 +14,9 @@ namespace CommandRunner
     public partial class CommandService : ServiceBase
     {
 
-        private static string _commandToExecute = ConfigurationManager.AppSettings["CommandToExecute"].ToString();
+        public static string CommandToExecute { get { return ConfigurationManager.AppSettings["CommandToExecute"].ToString(); } }
 
-        public int SecondsBetweenExecution
+        public static int SecondsBetweenExecution
         {
             get
             {
@@ -37,7 +37,7 @@ namespace CommandRunner
 
         protected override void OnStart(string[] args)
         {
-            var runner = new Command(_commandToExecute, SecondsBetweenExecution);
+            var runner = new Command(CommandToExecute, SecondsBetweenExecution);
             runner.BeginExecution();
         }
 

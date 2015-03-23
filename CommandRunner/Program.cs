@@ -8,8 +8,6 @@ namespace CommandRunner
 {
     static class Program
     {
-        private static string _commandToExecute = ConfigurationManager.AppSettings["CommandToExecute"].ToString();
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -22,7 +20,7 @@ namespace CommandRunner
                 Log.TextTraceSource.Listeners.Add(consoleTrace);
 
                 Log.Information("Constructing Runner");
-                var runner = new Command(_commandToExecute, 1);
+                var runner = new Command(CommandService.CommandToExecute, CommandService.SecondsBetweenExecution);
 
                 Log.Information("Beginning Execution");
                 runner.BeginExecution();
