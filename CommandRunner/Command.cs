@@ -54,9 +54,11 @@ namespace CommandRunner
                 p.WaitForExit();
                 ProcessRunning = false;
 
-                // TODO: Don't log if below are empty strings
-                Log.Information(p.StandardOutput.ReadToEnd());
-                Log.Error(p.StandardError.ReadToEnd());
+                var standardOutput = p.StandardOutput.ReadToEnd();
+                if (!string.IsNullOrEmpty(standardOutput)) { Log.Information(string.Format("COMMAND OUTPUT - {0}", standardOutput.Trim())); }
+
+                string errorOutput = p.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(errorOutput)) { Log.Error(errorOutput.Trim()); }
 
             }
         }
